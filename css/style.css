@@ -1,0 +1,132 @@
+/* Fond sombre */
+body {
+  margin: 0;
+  height: 100vh;
+  background: #0b0c10;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  perspective: 1000px;
+}
+
+/* Conteneur du message avec effet de perspective */
+.container {
+  text-align: center;
+  z-index: 10;
+}
+
+/* Texte animé type glitch et lumière */
+h1 {
+  font-size: 4rem;
+  position: relative;
+  color: #00ffea;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  animation: glow 2s ease-in-out infinite alternate;
+  user-select: none;
+  margin-bottom: 1rem;
+}
+
+/* Glitch effect stripes */
+h1::before,
+h1::after {
+  content: "Bienvenu sur Arinha";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+}
+
+h1::before {
+  left: 2px;
+  text-shadow: -2px 0 red;
+  clip-path: polygon(0 2%, 100% 2%, 100% 15%, 0 15%);
+  animation: glitchTop 2s linear infinite;
+}
+
+h1::after {
+  left: -2px;
+  text-shadow: -2px 0 blue;
+  clip-path: polygon(0 75%, 100% 75%, 100% 90%, 0 90%);
+  animation: glitchBottom 2s linear infinite;
+}
+
+/* Glow animation */
+@keyframes glow {
+  from {
+    text-shadow:
+      0 0 5px #00ffe7,
+      0 0 10px #00ffe7,
+      0 0 15px #00ffe7,
+      0 0 30px #00ffe7;
+  }
+  to {
+    text-shadow:
+      0 0 20px #00ffea,
+      0 0 30px #00ffa1,
+      0 0 40px #00ffea,
+      0 0 50px #00ffa1;
+  }
+}
+
+/* Glitch stripes animation */
+@keyframes glitchTop {
+  0% {
+    clip-path: polygon(0 2%, 100% 2%, 100% 15%, 0 15%);
+    transform: translate(0);
+  }
+  50% {
+    clip-path: polygon(0 7%, 100% 6%, 100% 20%, 0 20%);
+    transform: translate(-2px, -2px);
+  }
+  100% {
+    clip-path: polygon(0 2%, 100% 2%, 100% 15%, 0 15%);
+    transform: translate(0);
+  }
+}
+
+@keyframes glitchBottom {
+  0% {
+    clip-path: polygon(0 75%, 100% 75%, 100% 90%, 0 90%);
+    transform: translate(0);
+  }
+  50% {
+    clip-path: polygon(0 80%, 100% 80%, 100% 95%, 0 95%);
+    transform: translate(2px, 2px);
+  }
+  100% {
+    clip-path: polygon(0 75%, 100% 75%, 100% 90%, 0 90%);
+    transform: translate(0);
+  }
+}
+
+/* Background animated grid */
+.grid {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+}
+
+.grid div {
+  border: 1px solid rgba(0, 255, 234, 0.15);
+  animation: flicker 3s infinite;
+}
+
+/* Flicker animation with delays */
+.grid div:nth-child(odd) {
+  animation-delay: 0s;
+}
+.grid div:nth-child(even) {
+  animation-delay: 1.5s;
+}
+
+@keyframes flicker {
+  0%, 100% {opacity: 0.15;}
+  50% {opacity: 0.6;}
+}
